@@ -1,0 +1,14 @@
+server:
+  port: 8000
+
+graphql:
+  servlet.mapping: /graphql
+
+tmdb:
+  apiURL: http://api.themoviedb.org/3/
+  apiKey: api_key
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG

@@ -1,0 +1,20 @@
+schema {
+    query: Query
+}
+
+type Query {
+    movie(apiKey: String!, id: ID!): Movie
+}
+
+type Movie {
+    id: Integer!
+    imdbId: String
+    audit: Boolean!
+    genres: [Genre]
+    genreIds: [Integer]
+}
+
+type Genre {
+    id: Integer!
+    name: String!
+}
