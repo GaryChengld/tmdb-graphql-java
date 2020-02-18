@@ -3,15 +3,23 @@ schema {
 }
 
 type Query {
-    movie(apiKey: String!, id: ID!): Movie
+    movie(apiKey: String!, id: Integer!): Movie
 }
 
 type Movie {
     id: Integer!
-    imdbId: String
+    title: String!
     audit: Boolean!
     genres: [Genre]
-    genreIds: [Integer]
+    voteAverage: Float
+}
+
+type MovieDetail {
+    id: Integer!
+    title: String!
+    audit: Boolean!
+    genres: [Genre]
+    voteAverage: Float
 }
 
 type Genre {

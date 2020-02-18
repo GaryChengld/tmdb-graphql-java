@@ -4,11 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@EnableFeignClients
 public class TmdbGraphqlApp {
 
     public static void main(String[] args) {
@@ -23,8 +24,4 @@ public class TmdbGraphqlApp {
         return objectMapper;
     }
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 }
