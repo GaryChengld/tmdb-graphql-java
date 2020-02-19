@@ -3,26 +3,40 @@ schema {
 }
 
 type Query {
-    movie(apiKey: String!, id: Integer!): Movie
+    movieDetail(apiKey: String!, id: Int!): MovieDetail
 }
 
-type Movie {
-    id: Integer!
+type BaseMovie {
+    id: Int!
+    adult: Boolean!
     title: String!
-    audit: Boolean!
+    overview: String
+    popularity: Float
+    originalTitle: String
+    originalLanguage: String
+    backdropPath: String
+    posterPath: String
     genres: [Genre]
     voteAverage: Float
+    voteCount: Int
 }
 
 type MovieDetail {
-    id: Integer!
+    id: Int!
+    adult: Boolean!
     title: String!
-    audit: Boolean!
+    overview: String
+    popularity: Float
+    originalTitle: String
+    originalLanguage: String
+    backdropPath: String
+    posterPath: String
     genres: [Genre]
     voteAverage: Float
+    voteCount: Int
 }
 
 type Genre {
-    id: Integer!
+    id: Int!
     name: String!
 }

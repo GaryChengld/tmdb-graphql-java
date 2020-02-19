@@ -1,6 +1,8 @@
 package com.example.tmdb.graphql.services;
 
-import com.example.tmdb.graphql.types.Movie;
+import com.example.tmdb.graphql.types.BaseMovie;
+import com.example.tmdb.graphql.types.MovieDetail;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class MovieServiceTests {
 
     @Test
     public void findMovieById() {
-        Movie movie = movieService.findMovieById(apiKey, 181812);
+        MovieDetail movie = movieService.getMovieDetail(apiKey, 181812L);
         log.debug("Movie:{}", movie);
     }
 }

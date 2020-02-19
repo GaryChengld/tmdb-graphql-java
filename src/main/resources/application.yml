@@ -5,8 +5,8 @@ graphql:
   servlet.mapping: /graphql
 
 tmdb:
-  apiURL: http://api.themoviedb.org/3
-  apiKey: api_key
+  apiURL: https://api.themoviedb.org/3
+  imageBaseURL: https://image.tmdb.org/t/p/
 
 logging:
   level:
