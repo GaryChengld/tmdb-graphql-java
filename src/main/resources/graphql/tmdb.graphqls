@@ -2,6 +2,8 @@ schema {
     query: Query
 }
 
+scalar Date
+
 type Query {
     movieDetail(apiKey: String!, id: Int!): MovieDetail
 }
@@ -19,6 +21,7 @@ type BaseMovie {
     genres: [Genre]
     voteAverage: Float
     voteCount: Int
+    releaseDate: Date
 }
 
 type MovieDetail {
@@ -29,14 +32,23 @@ type MovieDetail {
     popularity: Float
     originalTitle: String
     originalLanguage: String
-    backdropPath: String
-    posterPath: String
+    backdropPath(size: ImageSize = ORIGINAL): String
+    posterPath(size: ImageSize = ORIGINAL): String
     genres: [Genre]
     voteAverage: Float
     voteCount: Int
+    releaseDate: Date
+    budget: Int
 }
 
 type Genre {
     id: Int!
     name: String!
+}
+
+enum ImageSize {
+    S
+    M
+    L
+    ORIGINAL
 }

@@ -6,7 +6,11 @@ graphql:
 
 tmdb:
   apiURL: https://api.themoviedb.org/3
-  imageBaseURL: https://image.tmdb.org/t/p/
+  image:
+    baseURL: https://image.tmdb.org/t/p/
+    size:
+      backdrop: w300, w780, w1280, original
+      poster: w92, w185, w342, original
 
 logging:
   level:

@@ -1,5 +1,6 @@
 package com.example.tmdb.graphql;
 
+import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -27,5 +28,4 @@ public class TmdbGraphqlApp {
 		objectMapper.registerModule(new JavaTimeModule());
 		return objectMapper;
 	}
-
 }

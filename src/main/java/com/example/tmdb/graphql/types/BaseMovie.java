@@ -1,9 +1,13 @@
 package com.example.tmdb.graphql.types;
 
+import java.util.Date;
 import java.util.List;
 
+import com.example.tmdb.graphql.mappers.TmdbDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.Data;
 
@@ -33,4 +37,7 @@ public class BaseMovie {
     private Double voteAverage;
     @JsonProperty("vote_count")
     private Integer voteCount;
+    @JsonProperty("release_date")
+    @JsonDeserialize(using = TmdbDateDeserializer.class)
+    private Date releaseDate;
 }

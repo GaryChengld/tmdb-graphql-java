@@ -12,4 +12,5 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieDetail extends BaseMovie {
+	private Long budget;
 }
