@@ -1,27 +1,20 @@
 package com.example.tmdb.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.example.tmdb.graphql.services.TmdbHelper;
-import com.example.tmdb.graphql.types.ImageSize;
+import com.example.tmdb.graphql.types.Language;
 import com.example.tmdb.graphql.types.MovieDetail;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Gary Cheng
  */
 @Component
-public class MovieDetailResolver implements GraphQLResolver<MovieDetail> {
-    private final TmdbHelper tmdbHelper;
+public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> implements GraphQLResolver<MovieDetail> {
 
-    public MovieDetailResolver(TmdbHelper tmdbHelper) {
-        this.tmdbHelper = tmdbHelper;
-    }
-
-    public String getBackdropPath(MovieDetail movie, ImageSize size) {
-        return this.tmdbHelper.getBackdropPath(size, movie.getBackdropPath());
-    }
-
-    public String getPosterPath(MovieDetail movie, ImageSize size) {
-        return this.tmdbHelper.getPosterPath(size, movie.getPosterPath());
+    public List<String> getSpokenLanguages(MovieDetail movie) {
+        return movie.getSpokenLanguages().stream().map(Language::getName).collect(Collectors.toList());
     }
 }

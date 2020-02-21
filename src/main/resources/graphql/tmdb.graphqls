@@ -5,7 +5,7 @@ schema {
 scalar Date
 
 type Query {
-    movieDetail(apiKey: String!, id: Int!): MovieDetail
+    movieDetail(id: Int!): MovieDetail
 }
 
 type BaseMovie {
@@ -38,11 +38,31 @@ type MovieDetail {
     voteAverage: Float
     voteCount: Int
     releaseDate: Date
+    status: String
+    runtime: Int    
+    tagLine: String
     budget: Int
+    revenue: Int
+    productionCountries: [Country]
+    productionCompanies: [BaseCompany]
+    spokenLanguages: [String]
+}
+
+
+type BaseCompany {
+    id: Int!
+    name: String!    
+    originCountry: String
+    logoPath(size: ImageSize = ORIGINAL): String
 }
 
 type Genre {
     id: Int!
+    name: String!
+}
+
+type Country {
+    code: String!
     name: String!
 }
 

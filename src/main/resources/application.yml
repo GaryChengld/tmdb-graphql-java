@@ -4,13 +4,25 @@ server:
 graphql:
   servlet.mapping: /graphql
 
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 6000
+        readTimeout: 6000
+        loggerLevel: basic
+
 tmdb:
-  apiURL: https://api.themoviedb.org/3
+  apiKey: 2456b3bf911743418b857ac8bc9f24e3
+  apiURL: http://api.themoviedb.org/3
   image:
-    baseURL: https://image.tmdb.org/t/p/
+    baseURL: http://image.tmdb.org/t/p/
     size:
       backdrop: w300, w780, w1280, original
       poster: w92, w185, w342, original
+      logo: w45, w154, w300, original
 
 logging:
   level:

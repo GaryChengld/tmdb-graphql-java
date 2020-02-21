@@ -15,6 +15,8 @@ public class TmdbHelper {
     private String[] backdropSizes;
     @Value("${tmdb.image.size.poster}")
     private String[] posterSizes;
+    @Value("${tmdb.image.size.logo}")
+    private String[] logoSizes;
 
     public String getBackdropPath(ImageSize size, String fileName) {
         return this.getImagePath(backdropSizes, size, fileName);
@@ -23,8 +25,12 @@ public class TmdbHelper {
     public String getPosterPath(ImageSize size, String fileName) {
         return this.getImagePath(posterSizes, size, fileName);
     }
+    
+    public String getLogoPath(ImageSize size, String fileName) {
+        return this.getImagePath(logoSizes, size, fileName);
+    }
 
     private String getImagePath(String[] sizes, ImageSize size, String fileName) {
-        return imageBaseURL + sizes[size.ordinal()] + fileName;
+        return null == fileName ? null : imageBaseURL + sizes[size.ordinal()] + fileName;
     }
 }

@@ -20,8 +20,8 @@ public class QueryResolver implements GraphQLQueryResolver {
 		this.movieService = movieService;
 	}
 
-	public MovieDetail movieDetail(String apiKey, long id) {
-		log.debug("getMovieDetail apiKey={}, id={}", apiKey, id);
-		return movieService.getMovieDetail(apiKey, id);
+	public MovieDetail movieDetail(long id) {
+		log.debug("getMovieDetail id={}", id);
+		return movieService.getMovieDetail(id);
 	}
 }
