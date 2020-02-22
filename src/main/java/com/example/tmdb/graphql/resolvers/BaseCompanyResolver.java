@@ -1,11 +1,10 @@
 package com.example.tmdb.graphql.resolvers;
 
-import org.springframework.stereotype.Component;
-
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.example.tmdb.graphql.services.TmdbHelper;
 import com.example.tmdb.graphql.types.BaseCompany;
 import com.example.tmdb.graphql.types.ImageSize;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Gary Cheng

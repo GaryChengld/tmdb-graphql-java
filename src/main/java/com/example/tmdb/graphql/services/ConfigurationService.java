@@ -12,8 +12,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 /**
  * @author Gary Cheng
  */
-@FeignClient(value = "configurationClient", url = "${tmdb.apiURL}/configuration", configuration = FeignConfig.class)
+@FeignClient(name = "configurationClient", url = "${tmdb.apiURL}", path = "/configuration", configuration = FeignConfig.class)
 public interface ConfigurationService {
-    @RequestMapping(value = "/languages", method = GET)
+    /**
+     * Get the list of official languages
+     *
+     * @return the list of languages
+     */
+    @RequestMapping(path = "/languages", method = GET)
     List<Language> languages();
 }

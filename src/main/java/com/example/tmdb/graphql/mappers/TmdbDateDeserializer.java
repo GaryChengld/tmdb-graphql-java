@@ -15,17 +15,17 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 /**
  * @author Gary Cheng
  */
-public class TmdbDateDeserializer extends JsonDeserializer<Date>{
+public class TmdbDateDeserializer extends JsonDeserializer<Date> {
 
-	@Override
-	public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-		SimpleDateFormat format = new SimpleDateFormat(TMDB_DATE_PATTERN);
+    @Override
+    public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+        SimpleDateFormat format = new SimpleDateFormat(TMDB_DATE_PATTERN);
         String date = parser.getText();
         try {
             return format.parse(date);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-	}
+    }
 
 }

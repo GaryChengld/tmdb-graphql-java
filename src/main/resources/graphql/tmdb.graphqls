@@ -6,6 +6,7 @@ scalar Date
 
 type Query {
     movieDetail(id: Int!): MovieDetail
+    movieNowPlaying(page: Int! = 1, region: String): MoviePageResults
 }
 
 type BaseMovie {
@@ -38,6 +39,7 @@ type MovieDetail {
     voteAverage: Float
     voteCount: Int
     releaseDate: Date
+    imdbId: String
     status: String
     runtime: Int    
     tagLine: String
@@ -48,6 +50,12 @@ type MovieDetail {
     spokenLanguages: [String]
 }
 
+type MoviePageResults {
+    page: Int!
+    totalPages: Int!
+    totalResults: Int!
+    results: [BaseMovie]
+}
 
 type BaseCompany {
     id: Int!

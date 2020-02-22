@@ -25,7 +25,7 @@ public class TmdbHelper {
     public String getPosterPath(ImageSize size, String fileName) {
         return this.getImagePath(posterSizes, size, fileName);
     }
-    
+
     public String getLogoPath(ImageSize size, String fileName) {
         return this.getImagePath(logoSizes, size, fileName);
     }

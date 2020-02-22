@@ -1,6 +1,7 @@
 package com.example.tmdb.graphql.types;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -10,9 +11,6 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Country {
-    @JsonAlias("iso_3166_1")
-    private String code;
-    @JsonAlias({"name", "english_name"})
-    private String name;
+public class GenreResults {
+    private List<Genre> genres;
 }

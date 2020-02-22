@@ -2,7 +2,8 @@ server:
   port: 8000
 
 graphql:
-  servlet.mapping: /graphql
+  servlet:
+    mapping: /graphql
 
 feign:
   okhttp:
