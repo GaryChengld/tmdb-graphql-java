@@ -12,6 +12,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MoviePageResults extends PageResults<BaseMovie> {
-
+public class CrewMember extends BaseMember {
+    private String department;
+    private String job;
 }

@@ -17,8 +17,8 @@ type BaseMovie {
     popularity: Float
     originalTitle: String
     originalLanguage: String
-    backdropPath: String
-    posterPath: String
+    backdropPath(size: ImageSize = ORIGINAL): String
+    posterPath(size: ImageSize = ORIGINAL): String
     genres: [Genre]
     voteAverage: Float
     voteCount: Int

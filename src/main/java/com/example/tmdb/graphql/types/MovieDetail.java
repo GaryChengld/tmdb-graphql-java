@@ -1,13 +1,12 @@
 package com.example.tmdb.graphql.types;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.List;
 
 /**
  * @author Gary Cheng
@@ -31,4 +30,5 @@ public class MovieDetail extends BaseMovie {
     private List<BaseCompany> productionCompanies;
     @JsonAlias("spoken_languages")
     private List<Language> spokenLanguages;
+    private Credits credits;
 }

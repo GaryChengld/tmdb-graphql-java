@@ -1,14 +1,13 @@
 package com.example.tmdb.graphql.types;
 
-import java.util.Date;
-import java.util.List;
-
 import com.example.tmdb.graphql.mappers.TmdbDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Gary Cheng
