@@ -48,6 +48,7 @@ type MovieDetail {
     productionCountries: [Country]
     productionCompanies: [BaseCompany]
     spokenLanguages: [String]
+    credits: Credits
 }
 
 type MoviePageResults {
@@ -62,6 +63,35 @@ type BaseCompany {
     name: String!    
     originCountry: String
     logoPath(size: ImageSize = ORIGINAL): String
+}
+
+type Credits {
+    casts: [CastMember]
+    crews: [CrewMember]
+}
+
+type CastMember {
+    id: Int!
+    creditId: String!
+    castId: Int!
+    name: String!
+    profilePath(size: ImageSize = ORIGINAL): String
+    character: String
+    order: Int
+}
+
+type CrewMember {
+    id: Int!
+    creditId: String!
+    name: String!
+    profilePath(size: ImageSize = ORIGINAL): String
+    department: String
+    job: String
+}
+
+type Images {
+     backdrops(size: ImageSize = ORIGINAL): [String]
+     posters(size: ImageSize = ORIGINAL): [String]
 }
 
 type Genre {

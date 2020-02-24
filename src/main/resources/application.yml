@@ -24,6 +24,7 @@ tmdb:
       backdrop: w300, w780, w1280, original
       poster: w92, w185, w342, original
       logo: w45, w154, w300, original
+      profile: w45, w185, h632, original
 
 logging:
   level:

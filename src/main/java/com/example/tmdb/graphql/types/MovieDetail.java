@@ -31,4 +31,5 @@ public class MovieDetail extends BaseMovie {
     @JsonAlias("spoken_languages")
     private List<Language> spokenLanguages;
     private Credits credits;
+    private Images images;
 }
