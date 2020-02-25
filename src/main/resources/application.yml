@@ -6,7 +6,7 @@ graphql:
     mapping: /graphql
 
 graphiql:
-  mapping: /
+  mapping: /graphiql
   endpoint:
     graphql: /graphql
   enabled: true
