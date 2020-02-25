@@ -5,6 +5,13 @@ graphql:
   servlet:
     mapping: /graphql
 
+graphiql:
+  mapping: /
+  endpoint:
+    graphql: /graphql
+  enabled: true
+  pageTitle: GraphiQL
+
 feign:
   okhttp:
     enabled: true
