@@ -2,6 +2,17 @@ graphql:
   servlet:
     mapping: /graphql
 
+graphiql:
+    mapping: /
+    endpoint:
+      graphql: /graphql
+      subscriptions: /subscriptions
+    subscriptions:
+      timeout: 30
+      reconnect: false
+    enabled: true
+    pageTitle: GraphiQL
+    
 feign:
   okhttp:
     enabled: true
@@ -26,4 +37,5 @@ tmdb:
 logging:
   level:
     root: INFO
+    graphql.servlet.internal: ERROR
     com.example: DEBUG
