@@ -6,7 +6,12 @@ scalar Date
 
 type Query {
     movieDetail(id: Int!): MovieDetail
-    movieNowPlaying(page: Int! = 1, region: String): MoviePageResults
+    movieCredits(id: Int!): Credits
+    movieImages(id: Int!): Images
+    nowPlayingMovies(page: Int! = 1, region: String): MoviePageResults
+    popularMovies(page: Int! = 1, region: String): MoviePageResults
+    topRatedMovies(page: Int! = 1, region: String): MoviePageResults
+    upcomingMovies(page: Int! = 1, region: String): MoviePageResults
 }
 
 type BaseMovie {
@@ -49,6 +54,8 @@ type MovieDetail {
     productionCompanies: [BaseCompany]
     spokenLanguages: [String]
     credits: Credits
+    images: Images
+    videos: [Video]
 }
 
 type MoviePageResults {
@@ -92,6 +99,17 @@ type CrewMember {
 type Images {
      backdrops(size: ImageSize = ORIGINAL): [String]
      posters(size: ImageSize = ORIGINAL): [String]
+}
+
+type Video {
+    id: String!
+    language: String
+    country: String
+    key: String
+    name: String
+    site: String
+    size: Int!
+    type: String
 }
 
 type Genre {

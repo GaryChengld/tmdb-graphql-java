@@ -32,4 +32,5 @@ public class MovieDetail extends BaseMovie {
     private List<Language> spokenLanguages;
     private Credits credits;
     private Images images;
+    private Videos videos;
 }

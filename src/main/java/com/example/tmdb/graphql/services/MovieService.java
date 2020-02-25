@@ -2,8 +2,11 @@ package com.example.tmdb.graphql.services;
 
 import com.example.tmdb.graphql.FeignConfig;
 import com.example.tmdb.graphql.types.Credits;
+import com.example.tmdb.graphql.types.Images;
 import com.example.tmdb.graphql.types.MovieDetail;
 import com.example.tmdb.graphql.types.MoviePageResults;
+import com.example.tmdb.graphql.types.Videos;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,14 +46,62 @@ public interface MovieService {
      */
     @RequestMapping(path = "/{id}/credits", method = GET)
     Credits getMovieCredits(@PathVariable("id") Long id);
+    
+    /**
+     * Return the images of a movie
+     * 
+     * @param id the id of the movie
+     * @return the images of the movie
+     */
+    @RequestMapping(path = "/{id}/images", method = GET)
+    Images getMovieImages(@PathVariable("id") Long id);
+    
+    /**
+     * Return the videos of a movie
+     * 
+     * @param id the id of the movie
+     * @return the videos of the movie
+     */
+    @RequestMapping(path = "/{id}/videos", method = GET)
+    Videos getMovieVideos(@PathVariable("id") Long id);
 
     /**
-     * Get a list of movies in theatres.
+     * Get a list of movies in theaters.
      *
-     * @param page   the page to query
+     * @param page the page to query
      * @param region the region to filter
-     * @return the list of movies.s
+     * @return the list of movies
      */
     @RequestMapping(path = "/now_playing", method = GET)
     MoviePageResults nowPlaying(@RequestParam(name = "page", defaultValue = "1") Integer page, @RequestParam(name = "region") String region);
+    
+    /**
+     * Get a list of popular movies
+     * 
+     * @param page the page to query
+     * @param region the region to filter
+     * @return the list of movies
+     */
+    @RequestMapping(path = "/popular", method = GET)
+    MoviePageResults popularMovies(@RequestParam(name = "page", defaultValue = "1") Integer page, @RequestParam(name = "region") String region);
+    
+    /**
+     * Get a list of top rated movies
+     * 
+     * @param page the page to query
+     * @param region the region to filter
+     * @return the list of movies
+     */
+    @RequestMapping(path = "/top_rated", method = GET)
+    MoviePageResults topRatedrMovies(@RequestParam(name = "page", defaultValue = "1") Integer page, @RequestParam(name = "region") String region);
+    
+    /**
+     * Get a list of top rated movies
+     * 
+     * @param page the page to query
+     * @param region the region to filter
+     * @return the list of movies
+     */
+    @RequestMapping(path = "/upcoming", method = GET)
+    MoviePageResults upcomingMovies(@RequestParam(name = "page", defaultValue = "1") Integer page, @RequestParam(name = "region") String region);
 }
