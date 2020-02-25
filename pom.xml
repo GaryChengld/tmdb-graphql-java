@@ -19,7 +19,7 @@
     <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
     <graphql-spring-boot-starter.version>5.5.0</graphql-spring-boot-starter.version>
     <graphql-java-tools.version>5.5.0</graphql-java-tools.version>
-    <graphiql-spring-boot-starter.version>5.0.2</graphiql-spring-boot-starter.version>
+    <graphiql-spring-boot-starter.version>5.5.0</graphiql-spring-boot-starter.version>
   </properties>
 
   <dependencies>
@@ -50,11 +50,13 @@
       <artifactId>graphql-spring-boot-starter</artifactId>
       <version>${graphql-spring-boot-starter.version}</version>
     </dependency>
+    <!--
     <dependency>
-      <groupId>com.graphql-java</groupId>
+      <groupId>com.graphql-java-kickstart</groupId>
       <artifactId>graphiql-spring-boot-starter</artifactId>
       <version>${graphiql-spring-boot-starter.version}</version>
     </dependency>
+    -->
     <dependency>
       <groupId>com.graphql-java-kickstart</groupId>
       <artifactId>graphql-java-tools</artifactId>
