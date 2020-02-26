@@ -4,6 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.example.tmdb.graphql.services.CommonCodeService;
 import com.example.tmdb.graphql.types.BaseMovie;
 import com.example.tmdb.graphql.types.Genre;
+import com.example.tmdb.graphql.types.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

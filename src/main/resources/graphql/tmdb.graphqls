@@ -37,7 +37,7 @@ type MovieDetail {
     overview: String
     popularity: Float
     originalTitle: String
-    originalLanguage: String
+    originalLanguage: Language
     backdropPath(size: ImageSize = ORIGINAL): String
     posterPath(size: ImageSize = ORIGINAL): String
     genres: [Genre]
@@ -52,7 +52,9 @@ type MovieDetail {
     revenue: Int
     productionCountries: [Country]
     productionCompanies: [BaseCompany]
-    spokenLanguages: [String]
+    spokenLanguages: [Language]
+    casts(top: Int): [CastMember]
+    crews(job: String): [CrewMember]
     credits: Credits
     images: Images
     videos: [Video]
@@ -115,6 +117,12 @@ type Video {
 type Genre {
     id: Int!
     name: String!
+}
+
+type Language {
+    code: String!
+    englishName: String!
+    name: String
 }
 
 type Country {

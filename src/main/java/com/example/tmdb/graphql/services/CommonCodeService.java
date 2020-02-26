@@ -4,9 +4,8 @@ import com.example.tmdb.graphql.types.Genre;
 import com.example.tmdb.graphql.types.Language;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * @author Gary Cheng
@@ -24,11 +23,10 @@ public class CommonCodeService {
         this.genreService = genreService;
     }
 
-    public String getLanguageByCode(String code) {
+    public Language getLanguageByCode(String code) {
         return this.languages.stream()
                 .filter(l -> l.getCode().equalsIgnoreCase(code))
                 .findFirst()
-                .map(Language::getName)
                 .orElse(null);
     }
 

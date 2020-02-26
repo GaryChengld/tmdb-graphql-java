@@ -12,6 +12,8 @@ import lombok.Data;
 public class Language {
     @JsonAlias("iso_639_1")
     private String code;
-    @JsonAlias({"name", "english_name"})
+    @JsonAlias("english_name")
+    private String englishName;
+    @JsonAlias("name")
     private String name;
 }
