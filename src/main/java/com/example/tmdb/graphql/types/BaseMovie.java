@@ -37,4 +37,6 @@ public class BaseMovie {
     @JsonAlias("release_date")
     @JsonDeserialize(using = TmdbDateDeserializer.class)
     private Date releaseDate;
+    private Images images;
+    private Videos videos;
 }

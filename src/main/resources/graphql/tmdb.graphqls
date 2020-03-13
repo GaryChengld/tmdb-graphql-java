@@ -28,6 +28,8 @@ type BaseMovie {
     voteAverage: Float
     voteCount: Int
     releaseDate: Date
+    images: Images
+    videos: [Video]
 }
 
 type MovieDetail {
