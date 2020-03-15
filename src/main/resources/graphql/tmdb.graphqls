@@ -29,7 +29,7 @@ type BaseMovie {
     voteCount: Int
     releaseDate: Date
     images: Images
-    videos: [Video]
+    videos(type: String): [Video]
 }
 
 type MovieDetail {
@@ -59,7 +59,7 @@ type MovieDetail {
     crews(job: String): [CrewMember]
     credits: Credits
     images: Images
-    videos: [Video]
+    videos(type: String): [Video]
 }
 
 type MoviePageResults {

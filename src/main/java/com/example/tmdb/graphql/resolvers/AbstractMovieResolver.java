@@ -7,6 +7,7 @@ import com.example.tmdb.graphql.types.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Gary Cheng
@@ -38,11 +39,14 @@ public abstract class AbstractMovieResolver<T extends BaseMovie> {
         return movie.getImages();
     }
 
-    public List<Video> getVideos(T movie) {
+    public List<Video> getVideos(T movie, String type) {
         if (null == movie.getVideos()) {
             movie.setVideos(movieService.getMovieVideos(movie.getId()));
         }
-        return movie.getVideos().getResults();
+        if (null == type) {
+            return movie.getVideos().getResults();
+        } else {
+            return movie.getVideos().getResults().stream().filter(v -> v.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
+        }
     }
-
 }
