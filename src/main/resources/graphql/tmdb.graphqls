@@ -47,6 +47,7 @@ type MovieDetail {
     voteAverage: Float
     voteCount: Int
     releaseDate: Date
+    releaseYear: Int
     imdbId: String
     status: String
     runtime: Int    
