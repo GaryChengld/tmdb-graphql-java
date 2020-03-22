@@ -6,6 +6,7 @@ import com.example.tmdb.graphql.services.TmdbHelper;
 import com.example.tmdb.graphql.types.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,16 @@ public abstract class AbstractMovieResolver<T extends BaseMovie> {
             movie.setImages(movieService.getMovieImages(movie.getId()));
         }
         return movie.getImages();
+    }
+
+    public Integer getReleaseYear(T movie) {
+        if (null == movie.getReleaseDate()) {
+            return null;
+        } else {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(movie.getReleaseDate());
+            return calendar.get(Calendar.YEAR);
+        }
     }
 
     public List<Video> getVideos(T movie, String type) {

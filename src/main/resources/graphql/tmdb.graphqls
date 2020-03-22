@@ -28,6 +28,7 @@ type BaseMovie {
     voteAverage: Float
     voteCount: Int
     releaseDate: Date
+    releaseYear: Int
     images: Images
     videos(type: String): [Video]
 }
