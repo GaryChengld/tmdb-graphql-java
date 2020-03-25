@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  */
 @Component
 public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> implements GraphQLResolver<MovieDetail> {
+    private static final String JOB_DIRECTOR = "Director";
 
     public List<Language> getSpokenLanguages(MovieDetail movie) {
         return movie.getSpokenLanguages().stream().map(l -> commonCodeService.getLanguageByCode(l.getCode())).collect(Collectors.toList());
@@ -38,6 +39,10 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
         } else {
             return movie.getCredits().getCrews().stream().filter(c -> job.equalsIgnoreCase(c.getJob())).collect(Collectors.toList());
         }
+    }
+
+    public List<CrewMember> getDirector(MovieDetail movie) {
+        return this.getCrews(movie, JOB_DIRECTOR);
     }
 
     public MoviePageResults getRecommendations(MovieDetail movie) {

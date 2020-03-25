@@ -60,6 +60,7 @@ type MovieDetail {
     spokenLanguages: [Language]
     casts(top: Int): [CastMember]
     crews(job: String): [CrewMember]
+    director: [CrewMember]
     credits: Credits
     images: Images
     videos(type: String): [Video]
