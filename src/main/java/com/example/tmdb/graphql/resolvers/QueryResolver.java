@@ -37,6 +37,9 @@ public class QueryResolver implements GraphQLQueryResolver {
         if (selectionSet.contains("videos")) {
             appendToResponse = this.addToAppended(appendToResponse, "videos");
         }
+        if (selectionSet.contains("recommendations")) {
+            appendToResponse = this.addToAppended(appendToResponse, "recommendations");
+        }
         
         log.debug("appendToResponse:{}", appendToResponse);
         if (StringUtils.isEmpty(appendToResponse)) {
