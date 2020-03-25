@@ -75,6 +75,11 @@ public class QueryResolver implements GraphQLQueryResolver {
         return movieService.upcomingMovies(page, region);
     }
 
+    public MoviePageResults movieRecommendations(long id, Integer page) {
+        log.debug("Received movieRecommendations request, id={}, page={}", id, page);
+        return movieService.getMovieRecommendations(id, page);
+    }
+
     private String addToAppended(String appendToResponse, String value) {
         if (StringUtils.isEmpty(appendToResponse)) {
             return value;

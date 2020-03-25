@@ -1,11 +1,9 @@
 package com.example.tmdb.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.example.tmdb.graphql.types.CastMember;
-import com.example.tmdb.graphql.types.CrewMember;
-import com.example.tmdb.graphql.types.Language;
-import com.example.tmdb.graphql.types.MovieDetail;
+import com.example.tmdb.graphql.types.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +33,17 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
         if (null == movie.getCredits()) {
             movie.setCredits(movieService.getMovieCredits(movie.getId()));
         }
-        return movie.getCredits().getCrews();
+        if (StringUtils.isEmpty(job)) {
+            return movie.getCredits().getCrews();
+        } else {
+            return movie.getCredits().getCrews().stream().filter(c -> job.equalsIgnoreCase(c.getJob())).collect(Collectors.toList());
+        }
+    }
+
+    public MoviePageResults getRecommendations(MovieDetail movie) {
+        if (null == movie.getRecommendations()) {
+            movie.setRecommendations(movieService.getMovieRecommendations(movie.getId(), 1));
+        }
+        return movie.getRecommendations();
     }
 }

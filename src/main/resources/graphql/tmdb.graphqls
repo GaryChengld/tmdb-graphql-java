@@ -8,6 +8,7 @@ type Query {
     movieDetail(id: Int!): MovieDetail
     movieCredits(id: Int!): Credits
     movieImages(id: Int!): Images
+    movieRecommendations(id: Int!, page: Int! = 1): MoviePageResults
     nowPlayingMovies(page: Int! = 1, region: String): MoviePageResults
     popularMovies(page: Int! = 1, region: String): MoviePageResults
     topRatedMovies(page: Int! = 1, region: String): MoviePageResults
@@ -62,6 +63,7 @@ type MovieDetail {
     credits: Credits
     images: Images
     videos(type: String): [Video]
+    recommendations: MoviePageResults
 }
 
 type MoviePageResults {

@@ -104,4 +104,14 @@ public interface MovieService {
      */
     @RequestMapping(path = "/upcoming", method = GET)
     MoviePageResults upcomingMovies(@RequestParam(name = "page", defaultValue = "1") Integer page, @RequestParam(name = "region") String region);
+
+    /**
+     * Get recommendations by given movie id
+     *
+     * @param id the movie id
+     * @param page the page number
+     * @return he list of movies
+     */
+    @RequestMapping(path = "/{id}/recommendations", method = GET)
+    MoviePageResults getMovieRecommendations(@PathVariable("id") Long id, @RequestParam(name = "page", defaultValue = "1") Integer page);
 }
