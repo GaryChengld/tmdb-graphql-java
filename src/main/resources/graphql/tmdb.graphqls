@@ -32,6 +32,7 @@ type BaseMovie {
     releaseYear: Int
     images: Images
     videos(type: String): [Video]
+    trailer: Video
 }
 
 type MovieDetail {
@@ -64,6 +65,7 @@ type MovieDetail {
     credits: Credits
     images: Images
     videos(type: String): [Video]
+    trailer: Video
     recommendations: MoviePageResults
 }
 

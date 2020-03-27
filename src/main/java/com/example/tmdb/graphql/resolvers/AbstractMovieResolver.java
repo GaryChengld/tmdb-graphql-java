@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
  * @author Gary Cheng
  */
 public abstract class AbstractMovieResolver<T extends BaseMovie> {
+    private static final String VIDEO_TYPE_TRAILER = "Trailer";
+
     @Autowired
     protected TmdbHelper tmdbHelper;
     @Autowired
@@ -59,5 +61,15 @@ public abstract class AbstractMovieResolver<T extends BaseMovie> {
         } else {
             return movie.getVideos().getResults().stream().filter(v -> v.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
         }
+    }
+
+    public Video getTrailer(T movie) {
+        if (null == movie.getVideos()) {
+            movie.setVideos(movieService.getMovieVideos(movie.getId()));
+        }
+        return movie.getVideos().getResults().stream()
+                .filter(v -> v.getType().equalsIgnoreCase(VIDEO_TYPE_TRAILER))
+                .findFirst()
+                .orElse(null);
     }
 }
