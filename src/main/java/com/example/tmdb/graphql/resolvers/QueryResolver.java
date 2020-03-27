@@ -34,7 +34,7 @@ public class QueryResolver implements GraphQLQueryResolver {
         if (selectionSet.contains("images")) {
             appendToResponse = this.addToAppended(appendToResponse, "images");
         }
-        if (selectionSet.contains("videos")) {
+        if (selectionSet.contains("videos") || selectionSet.contains("trailer")) {
             appendToResponse = this.addToAppended(appendToResponse, "videos");
         }
         if (selectionSet.contains("recommendations")) {

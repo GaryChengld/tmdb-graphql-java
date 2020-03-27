@@ -30,8 +30,6 @@ type BaseMovie {
     voteCount: Int
     releaseDate: Date
     releaseYear: Int
-    images: Images
-    videos(type: String): [Video]
     trailer: Video
 }
 
@@ -50,6 +48,7 @@ type MovieDetail {
     voteCount: Int
     releaseDate: Date
     releaseYear: Int
+    trailer: Video
     imdbId: String
     status: String
     runtime: Int    
@@ -65,7 +64,6 @@ type MovieDetail {
     credits: Credits
     images: Images
     videos(type: String): [Video]
-    trailer: Video
     recommendations: MoviePageResults
 }
 

@@ -35,13 +35,6 @@ public abstract class AbstractMovieResolver<T extends BaseMovie> {
         return this.tmdbHelper.getPosterPath(size, movie.getPosterPath());
     }
 
-    public Images getImages(T movie) {
-        if (null == movie.getImages()) {
-            movie.setImages(movieService.getMovieImages(movie.getId()));
-        }
-        return movie.getImages();
-    }
-
     public Integer getReleaseYear(T movie) {
         if (null == movie.getReleaseDate()) {
             return null;
@@ -50,26 +43,5 @@ public abstract class AbstractMovieResolver<T extends BaseMovie> {
             calendar.setTime(movie.getReleaseDate());
             return calendar.get(Calendar.YEAR);
         }
-    }
-
-    public List<Video> getVideos(T movie, String type) {
-        if (null == movie.getVideos()) {
-            movie.setVideos(movieService.getMovieVideos(movie.getId()));
-        }
-        if (null == type) {
-            return movie.getVideos().getResults();
-        } else {
-            return movie.getVideos().getResults().stream().filter(v -> v.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
-        }
-    }
-
-    public Video getTrailer(T movie) {
-        if (null == movie.getVideos()) {
-            movie.setVideos(movieService.getMovieVideos(movie.getId()));
-        }
-        return movie.getVideos().getResults().stream()
-                .filter(v -> v.getType().equalsIgnoreCase(VIDEO_TYPE_TRAILER))
-                .findFirst()
-                .orElse(null);
     }
 }

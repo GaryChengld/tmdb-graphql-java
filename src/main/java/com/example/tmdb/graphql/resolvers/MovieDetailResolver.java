@@ -1,6 +1,7 @@
 package com.example.tmdb.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
+import com.example.tmdb.graphql.TmdbConstants;
 import com.example.tmdb.graphql.types.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,34 @@ import java.util.stream.Collectors;
 @Component
 public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> implements GraphQLResolver<MovieDetail> {
     private static final String JOB_DIRECTOR = "Director";
+
+    public Images getImages(MovieDetail movie) {
+        if (null == movie.getImages()) {
+            movie.setImages(movieService.getMovieImages(movie.getId()));
+        }
+        return movie.getImages();
+    }
+
+    public List<Video> getVideos(MovieDetail movie, String type) {
+        if (null == movie.getVideos()) {
+            movie.setVideos(movieService.getMovieVideos(movie.getId()));
+        }
+        if (null == type) {
+            return movie.getVideos().getResults();
+        } else {
+            return movie.getVideos().getResults().stream().filter(v -> v.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
+        }
+    }
+
+    public Video getTrailer(MovieDetail movie) {
+        if (null == movie.getVideos()) {
+            movie.setVideos(movieService.getMovieVideos(movie.getId()));
+        }
+        return movie.getVideos().getResults().stream()
+                .filter(v -> v.getType().equalsIgnoreCase(TmdbConstants.VIDEO_TYPE_TRAILER))
+                .findFirst()
+                .orElse(null);
+    }
 
     public List<Language> getSpokenLanguages(MovieDetail movie) {
         return movie.getSpokenLanguages().stream().map(l -> commonCodeService.getLanguageByCode(l.getCode())).collect(Collectors.toList());
