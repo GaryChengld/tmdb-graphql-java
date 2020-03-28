@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> implements GraphQLResolver<MovieDetail> {
     private static final String JOB_DIRECTOR = "Director";
+    private static final String DEPARTMENT_WRITING = "Writing";
 
     public Images getImages(MovieDetail movie) {
         if (null == movie.getImages()) {
@@ -70,8 +71,17 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
         }
     }
 
-    public List<CrewMember> getDirector(MovieDetail movie) {
+    public List<CrewMember> getDirectors(MovieDetail movie) {
         return this.getCrews(movie, JOB_DIRECTOR);
+    }
+
+    public List<CrewMember> getWriters(MovieDetail movie) {
+        if (null == movie.getCredits()) {
+            movie.setCredits(movieService.getMovieCredits(movie.getId()));
+        }
+        return movie.getCredits().getCrews().stream()
+                .filter(c -> DEPARTMENT_WRITING.equalsIgnoreCase(c.getDepartment()))
+                .collect(Collectors.toList());
     }
 
     public MoviePageResults getRecommendations(MovieDetail movie) {

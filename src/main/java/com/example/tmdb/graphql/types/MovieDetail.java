@@ -19,11 +19,12 @@ public class MovieDetail extends BaseMovie {
     @JsonAlias("imdb_id")
     private String imdbId;
     private List<Genre> genres;
+    private String homepage;
     private Integer runtime;
     private Long budget;
     private Long revenue;
     private String status;
-    private String tagLine;
+    private String tagline;
     @JsonAlias("production_countries")
     private List<Country> productionCountries;
     @JsonAlias("production_companies")

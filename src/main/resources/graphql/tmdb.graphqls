@@ -44,6 +44,7 @@ type MovieDetail {
     backdropPath(size: ImageSize = ORIGINAL): String
     posterPath(size: ImageSize = ORIGINAL): String
     genres: [Genre]
+    homepage: String
     voteAverage: Float
     voteCount: Int
     releaseDate: Date
@@ -52,7 +53,7 @@ type MovieDetail {
     imdbId: String
     status: String
     runtime: Int    
-    tagLine: String
+    tagline: String
     budget: Int
     revenue: Int
     productionCountries: [Country]
@@ -60,7 +61,8 @@ type MovieDetail {
     spokenLanguages: [Language]
     casts(top: Int): [CastMember]
     crews(job: String): [CrewMember]
-    director: [CrewMember]
+    directors: [CrewMember]
+    writers: [CrewMember]
     credits: Credits
     images: Images
     videos(type: String): [Video]
