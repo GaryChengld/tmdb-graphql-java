@@ -6,6 +6,7 @@ import com.example.tmdb.graphql.types.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,9 +80,9 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
         if (null == movie.getCredits()) {
             movie.setCredits(movieService.getMovieCredits(movie.getId()));
         }
-        return movie.getCredits().getCrews().stream()
+        return this.mergeCrewMembers(movie.getCredits().getCrews().stream()
                 .filter(c -> DEPARTMENT_WRITING.equalsIgnoreCase(c.getDepartment()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public MoviePageResults getRecommendations(MovieDetail movie) {
@@ -89,5 +90,16 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
             movie.setRecommendations(movieService.getMovieRecommendations(movie.getId(), 1));
         }
         return movie.getRecommendations();
+    }
+
+    private List<CrewMember> mergeCrewMembers(List<CrewMember> crewMemberList) {
+        List<CrewMember> mergedCrewMembers = new ArrayList<>();
+        for (CrewMember crewMember : crewMemberList) {
+            mergedCrewMembers.stream()
+                    .filter(c -> c.getId().equals(crewMember.getId()))
+                    .findFirst()
+                    .ifPresentOrElse(c -> c.setJob(c.getJob() + " / " + crewMember.getJob()), () -> mergedCrewMembers.add(crewMember));
+        }
+        return mergedCrewMembers;
     }
 }
