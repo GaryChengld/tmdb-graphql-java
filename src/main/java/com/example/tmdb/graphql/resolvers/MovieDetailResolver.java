@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -95,10 +96,15 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
     private List<CrewMember> mergeCrewMembers(List<CrewMember> crewMemberList) {
         List<CrewMember> mergedCrewMembers = new ArrayList<>();
         for (CrewMember crewMember : crewMemberList) {
-            mergedCrewMembers.stream()
+            Optional<CrewMember> matchedCrew = mergedCrewMembers.stream()
                     .filter(c -> c.getId().equals(crewMember.getId()))
-                    .findFirst()
-                    .ifPresentOrElse(c -> c.setJob(c.getJob() + " / " + crewMember.getJob()), () -> mergedCrewMembers.add(crewMember));
+                    .findFirst();
+            if (matchedCrew.isPresent()) {
+                CrewMember crew = matchedCrew.get();
+                crew.setJob(crew.getJob() + " / " + crewMember.getJob());
+            } else {
+                mergedCrewMembers.add(crewMember);
+            }
         }
         return mergedCrewMembers;
     }
