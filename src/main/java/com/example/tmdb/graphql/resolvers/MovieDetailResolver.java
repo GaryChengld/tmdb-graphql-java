@@ -67,7 +67,7 @@ public class MovieDetailResolver extends AbstractMovieResolver<MovieDetail> impl
             movie.setCredits(movieService.getMovieCredits(movie.getId()));
         }
         if (StringUtils.isEmpty(job)) {
-            return movie.getCredits().getCrews();
+            return this.mergeCrewMembers(movie.getCredits().getCrews());
         } else {
             return movie.getCredits().getCrews().stream().filter(c -> job.equalsIgnoreCase(c.getJob())).collect(Collectors.toList());
         }
