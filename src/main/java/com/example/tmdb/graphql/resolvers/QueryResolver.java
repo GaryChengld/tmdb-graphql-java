@@ -2,10 +2,8 @@ package com.example.tmdb.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.tmdb.graphql.services.MovieService;
-import com.example.tmdb.graphql.types.Credits;
-import com.example.tmdb.graphql.types.Images;
-import com.example.tmdb.graphql.types.MovieDetail;
-import com.example.tmdb.graphql.types.MoviePageResults;
+import com.example.tmdb.graphql.services.PersonService;
+import com.example.tmdb.graphql.types.*;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.schema.DataFetchingFieldSelectionSet;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +17,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class QueryResolver implements GraphQLQueryResolver {
     private final MovieService movieService;
+    private final PersonService personService;
 
-    public QueryResolver(MovieService movieService) {
+    public QueryResolver(MovieService movieService, PersonService personService) {
         this.movieService = movieService;
+        this.personService = personService;
     }
 
     public MovieDetail movieDetail(long id, DataFetchingEnvironment env) {
@@ -81,6 +81,11 @@ public class QueryResolver implements GraphQLQueryResolver {
     public MoviePageResults movieRecommendations(long id, Integer page) {
         log.debug("Received movieRecommendations request, id={}, page={}", id, page);
         return movieService.getMovieRecommendations(id, page);
+    }
+
+    public Person person(long id) {
+        log.debug("Received person request, id={}", id);
+        return personService.getPerson(id);
     }
 
     private String addToAppended(String appendToResponse, String value) {

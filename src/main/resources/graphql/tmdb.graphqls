@@ -8,6 +8,7 @@ type Query {
     movieDetail(id: Int!): MovieDetail
     movieCredits(id: Int!): Credits
     movieImages(id: Int!): Images
+    person(id: Int!): Person
     movieRecommendations(id: Int!, page: Int! = 1): MoviePageResults
     nowPlayingMovies(page: Int! = 1, region: String): MoviePageResults
     popularMovies(page: Int! = 1, region: String): MoviePageResults
@@ -137,6 +138,22 @@ type Language {
 type Country {
     code: String!
     name: String!
+}
+
+type Person {
+    id: Int!
+    name: String
+    knownForDepartment: String
+    birthday: Date
+    deathday: Date
+    alsoKnownAs: [String]
+    gender: Int!
+    biography: String
+    popularity: Float
+    placeOfBirth: String
+    profilePath(size: ImageSize = ORIGINAL): String
+    imdbId: String
+    homepage: String
 }
 
 enum ImageSize {
