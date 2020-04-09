@@ -1,8 +1,8 @@
 package com.example.tmdb.graphql.services;
 
 import com.example.tmdb.graphql.FeignConfig;
-import com.example.tmdb.graphql.types.MovieDetail;
 import com.example.tmdb.graphql.types.Person;
+import com.example.tmdb.graphql.types.PersonMovieCredits;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,4 +22,7 @@ public interface PersonService {
      */
     @RequestMapping(path = "/{id}", method = GET)
     Person getPerson(@PathVariable("id") Long id);
+
+    @RequestMapping(path = "/{id}/movie_credits", method = GET)
+    PersonMovieCredits getPersonMovieCredits(@PathVariable("id") Long id);
 }

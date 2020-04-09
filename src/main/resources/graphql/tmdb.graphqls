@@ -9,6 +9,7 @@ type Query {
     movieCredits(id: Int!): Credits
     movieImages(id: Int!): Images
     person(id: Int!): Person
+    personMovieCredits(id: Int!): PersonMovieCredits
     movieRecommendations(id: Int!, page: Int! = 1): MoviePageResults
     nowPlayingMovies(page: Int! = 1, region: String): MoviePageResults
     popularMovies(page: Int! = 1, region: String): MoviePageResults
@@ -108,6 +109,47 @@ type CrewMember {
     job: String
 }
 
+type MovieCast {
+    character: String
+    creditId: String!
+    id: Int!
+    adult: Boolean!
+    title: String!
+    overview: String
+    popularity: Float
+    originalTitle: String
+    originalLanguage: String
+    backdropPath(size: ImageSize = ORIGINAL): String
+    posterPath(size: ImageSize = ORIGINAL): String
+    genres: [Genre]
+    voteAverage: Float
+    voteCount: Int
+    releaseDate: Date
+    releaseYear: Int
+    trailer: Video
+}
+
+type MovieCrew {
+    department: String
+    job: String
+    creditId: String!
+    id: Int!
+    adult: Boolean!
+    title: String!
+    overview: String
+    popularity: Float
+    originalTitle: String
+    originalLanguage: String
+    backdropPath(size: ImageSize = ORIGINAL): String
+    posterPath(size: ImageSize = ORIGINAL): String
+    genres: [Genre]
+    voteAverage: Float
+    voteCount: Int
+    releaseDate: Date
+    releaseYear: Int
+    trailer: Video
+}
+
 type Images {
      backdrops(size: ImageSize = ORIGINAL): [String]
      posters(size: ImageSize = ORIGINAL): [String]
@@ -154,6 +196,13 @@ type Person {
     profilePath(size: ImageSize = ORIGINAL): String
     imdbId: String
     homepage: String
+    movieCredits: PersonMovieCredits
+}
+
+type PersonMovieCredits {
+    id: Int
+    casts: [MovieCast]
+    crews: [MovieCrew]
 }
 
 enum ImageSize {

@@ -1,5 +1,6 @@
 package com.example.tmdb.graphql.resolvers;
 
+import com.example.tmdb.graphql.TmdbConstants;
 import com.example.tmdb.graphql.services.CommonCodeService;
 import com.example.tmdb.graphql.services.MovieService;
 import com.example.tmdb.graphql.services.TmdbHelper;
@@ -43,5 +44,16 @@ public abstract class AbstractMovieResolver<T extends BaseMovie> {
             calendar.setTime(movie.getReleaseDate());
             return calendar.get(Calendar.YEAR);
         }
+    }
+
+    protected Video getTrailer(long movieId) {
+        return movieService.getMovieVideos(movieId).getResults().stream()
+                .filter(v -> v.getType().equalsIgnoreCase(TmdbConstants.VIDEO_TYPE_TRAILER))
+                .findFirst()
+                .orElse(null);
+    }
+
+    protected List<Genre> getGenres(List<Integer> genreIds) {
+        return genreIds.stream().map(commonCodeService::getMovieGenreById).collect(Collectors.toList());
     }
 }

@@ -35,4 +35,6 @@ public class Person {
     @JsonAlias("imdb_id")
     private String imdbId;
     private String homepage;
+    @JsonAlias("movie_credits")
+    private PersonMovieCredits movieCredits;
 }

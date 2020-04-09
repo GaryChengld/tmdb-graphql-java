@@ -88,6 +88,11 @@ public class QueryResolver implements GraphQLQueryResolver {
         return personService.getPerson(id);
     }
 
+    public PersonMovieCredits personMovieCredits(long id) {
+        log.debug("Received personMovieCredits request, id={}", id);
+        return personService.getPersonMovieCredits(id);
+    }
+
     private String addToAppended(String appendToResponse, String value) {
         if (StringUtils.isEmpty(appendToResponse)) {
             return value;
