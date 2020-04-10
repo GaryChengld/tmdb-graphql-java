@@ -83,9 +83,18 @@ public class QueryResolver implements GraphQLQueryResolver {
         return movieService.getMovieRecommendations(id, page);
     }
 
-    public Person person(long id) {
+    public Person person(long id, DataFetchingEnvironment env) {
         log.debug("Received person request, id={}", id);
-        return personService.getPerson(id);
+        String appendToResponse = "";
+        DataFetchingFieldSelectionSet selectionSet = env.getSelectionSet();
+        if (selectionSet.contains("movieCredits")) {
+            appendToResponse = this.addToAppended(appendToResponse, "movie_credits");
+        }
+        if (StringUtils.isEmpty(appendToResponse)) {
+            return personService.getPerson(id);
+        } else {
+            return personService.getPerson(id, appendToResponse);
+        }
     }
 
     public PersonMovieCredits personMovieCredits(long id) {
