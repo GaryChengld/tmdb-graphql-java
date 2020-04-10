@@ -197,6 +197,7 @@ type Person {
     imdbId: String
     homepage: String
     movieCredits: PersonMovieCredits
+    knownFor: [BaseMovie]
 }
 
 type PersonMovieCredits {
