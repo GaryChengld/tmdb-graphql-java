@@ -87,7 +87,7 @@ public class QueryResolver implements GraphQLQueryResolver {
         log.debug("Received person request, id={}", id);
         String appendToResponse = "";
         DataFetchingFieldSelectionSet selectionSet = env.getSelectionSet();
-        if (selectionSet.contains("movieCredits")) {
+        if (selectionSet.contains("movieCredits") || selectionSet.equals("knownFor")) {
             appendToResponse = this.addToAppended(appendToResponse, "movie_credits");
         }
         if (StringUtils.isEmpty(appendToResponse)) {
