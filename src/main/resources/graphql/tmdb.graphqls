@@ -10,6 +10,7 @@ type Query {
     movieImages(id: Int!): Images
     person(id: Int!): Person
     personMovieCredits(id: Int!): PersonMovieCredits
+    personImages(id: Int!): PersonImages
     movieRecommendations(id: Int!, page: Int! = 1): MoviePageResults
     nowPlayingMovies(page: Int! = 1, region: String): MoviePageResults
     popularMovies(page: Int! = 1, region: String): MoviePageResults
@@ -155,6 +156,10 @@ type Images {
      posters(size: ImageSize = ORIGINAL): [String]
 }
 
+type PersonImages {
+    profiles(size: ImageSize = ORIGINAL): [String]
+}
+
 type Video {
     id: String!
     language: String
@@ -198,6 +203,7 @@ type Person {
     homepage: String
     movieCredits: PersonMovieCredits
     knownFor: [BaseMovie]
+    images: PersonImages
 }
 
 type PersonMovieCredits {

@@ -37,4 +37,5 @@ public class Person {
     private String homepage;
     @JsonAlias("movie_credits")
     private PersonMovieCredits movieCredits;
+    private PersonImages images;
 }

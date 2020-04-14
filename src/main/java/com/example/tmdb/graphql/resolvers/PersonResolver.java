@@ -3,10 +3,7 @@ package com.example.tmdb.graphql.resolvers;
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.example.tmdb.graphql.services.PersonService;
 import com.example.tmdb.graphql.services.TmdbHelper;
-import com.example.tmdb.graphql.types.BaseMovie;
-import com.example.tmdb.graphql.types.ImageSize;
-import com.example.tmdb.graphql.types.Person;
-import com.example.tmdb.graphql.types.PersonMovieCredits;
+import com.example.tmdb.graphql.types.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,5 +49,12 @@ public class PersonResolver implements GraphQLResolver<Person> {
                 .sorted((m1, m2) -> m2.getPopularity().compareTo(m1.getPopularity()))
                 .limit(20)
                 .collect(Collectors.toList());
+    }
+
+    public PersonImages getImages(Person person) {
+        if (null == person.getImages()) {
+            person.setImages(this.personService.getPersonImages(person.getId()));
+        }
+        return person.getImages();
     }
 }

@@ -90,6 +90,9 @@ public class QueryResolver implements GraphQLQueryResolver {
         if (selectionSet.contains("movieCredits") || selectionSet.equals("knownFor")) {
             appendToResponse = this.addToAppended(appendToResponse, "movie_credits");
         }
+        if (selectionSet.contains("images")) {
+            appendToResponse = this.addToAppended(appendToResponse, "images");
+        }
         if (StringUtils.isEmpty(appendToResponse)) {
             return personService.getPerson(id);
         } else {
@@ -100,6 +103,11 @@ public class QueryResolver implements GraphQLQueryResolver {
     public PersonMovieCredits personMovieCredits(long id) {
         log.debug("Received personMovieCredits request, id={}", id);
         return personService.getPersonMovieCredits(id);
+    }
+
+    public PersonImages personImages(long id) {
+        log.debug("Received personImages request, id={}", id);
+        return personService.getPersonImages(id);
     }
 
     private String addToAppended(String appendToResponse, String value) {
