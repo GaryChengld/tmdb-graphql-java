@@ -3,6 +3,7 @@ package com.example.tmdb.graphql.resolvers;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.tmdb.graphql.services.MovieService;
 import com.example.tmdb.graphql.services.PersonService;
+import com.example.tmdb.graphql.services.SearchService;
 import com.example.tmdb.graphql.types.*;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.schema.DataFetchingFieldSelectionSet;
@@ -18,10 +19,12 @@ import org.springframework.stereotype.Component;
 public class QueryResolver implements GraphQLQueryResolver {
     private final MovieService movieService;
     private final PersonService personService;
+    private final SearchService searchService;
 
-    public QueryResolver(MovieService movieService, PersonService personService) {
+    public QueryResolver(MovieService movieService, PersonService personService, SearchService searchService) {
         this.movieService = movieService;
         this.personService = personService;
+        this.searchService = searchService;
     }
 
     public MovieDetail movieDetail(long id, DataFetchingEnvironment env) {
@@ -40,7 +43,7 @@ public class QueryResolver implements GraphQLQueryResolver {
         if (selectionSet.contains("recommendations")) {
             appendToResponse = this.addToAppended(appendToResponse, "recommendations");
         }
-        
+
         log.debug("appendToResponse:{}", appendToResponse);
         if (StringUtils.isEmpty(appendToResponse)) {
             return movieService.getMovieDetail(id);
@@ -50,32 +53,38 @@ public class QueryResolver implements GraphQLQueryResolver {
     }
 
     public Credits movieCredits(long id) {
-    	log.debug("Received movieCredits request, id={}", id);
-    	return movieService.getMovieCredits(id);
+        log.debug("Received movieCredits request, id={}", id);
+        return movieService.getMovieCredits(id);
     }
-    
+
     public Images movieImages(long id) {
-    	log.debug("Received movieImages request, id={}", id);
-    	return movieService.getMovieImages(id);
+        log.debug("Received movieImages request, id={}", id);
+        return movieService.getMovieImages(id);
     }
+
     public MoviePageResults nowPlayingMovies(Integer page, String region) {
         log.debug("Received nowPlayingMovies request, page={}, region={}", page, region);
         return movieService.nowPlaying(page, region);
     }
-    
+
     public MoviePageResults popularMovies(Integer page, String region) {
         log.debug("Received popularMovies request, page={}, region={}", page, region);
         return movieService.popularMovies(page, region);
     }
-    
+
     public MoviePageResults topRatedMovies(Integer page, String region) {
         log.debug("Received topRatedMovies request, page={}, region={}", page, region);
         return movieService.topRatedrMovies(page, region);
     }
-    
+
     public MoviePageResults upcomingMovies(Integer page, String region) {
         log.debug("Received upcomingMovies request, page={}, region={}", page, region);
         return movieService.upcomingMovies(page, region);
+    }
+
+    public MoviePageResults searchMovie(String query, Integer page, String region) {
+        log.debug("Search movie request, query={}, page={}, region={}", query, page, region);
+        return searchService.searchMovie(query, page, region);
     }
 
     public MoviePageResults movieRecommendations(long id, Integer page) {
