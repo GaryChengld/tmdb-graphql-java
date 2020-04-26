@@ -1,6 +1,7 @@
 package com.example.tmdb.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.example.tmdb.graphql.services.DiscoverService;
 import com.example.tmdb.graphql.services.MovieService;
 import com.example.tmdb.graphql.services.PersonService;
 import com.example.tmdb.graphql.services.SearchService;
@@ -11,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Gary Cheng
  */
@@ -20,11 +24,13 @@ public class QueryResolver implements GraphQLQueryResolver {
     private final MovieService movieService;
     private final PersonService personService;
     private final SearchService searchService;
+    private final DiscoverService discoverService;
 
-    public QueryResolver(MovieService movieService, PersonService personService, SearchService searchService) {
+    public QueryResolver(MovieService movieService, PersonService personService, SearchService searchService, DiscoverService discoverService) {
         this.movieService = movieService;
         this.personService = personService;
         this.searchService = searchService;
+        this.discoverService = discoverService;
     }
 
     public MovieDetail movieDetail(long id, DataFetchingEnvironment env) {
@@ -85,6 +91,16 @@ public class QueryResolver implements GraphQLQueryResolver {
     public MoviePageResults searchMovie(String query, Integer page, String region) {
         log.debug("Search movie request, query={}, page={}, region={}", query, page, region);
         return searchService.searchMovie(query, page, region);
+    }
+
+    public MoviePageResults moviesByGenre(String genre, Integer page, String region) {
+        log.debug("Search movie by genre, genre={}, page={}, region={}", genre, page, region);
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put(DiscoverService.PARAM_WITH_GENRES, genre);
+        queryMap.put(DiscoverService.PARAM_REGION, region);
+        queryMap.put(DiscoverService.PARAM_PAGE, null == page ? "1" : page.toString());
+        queryMap.put(DiscoverService.PARAM_SORT_BY, DiscoverService.SORT_BY_POPULARITY_DESC);
+        return discoverService.discoverMovie(queryMap);
     }
 
     public MoviePageResults movieRecommendations(long id, Integer page) {
