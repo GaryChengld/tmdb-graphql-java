@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,6 +98,21 @@ public class QueryResolver implements GraphQLQueryResolver {
         log.debug("Search movie by genre, genre={}, page={}, region={}", genre, page, region);
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put(DiscoverService.PARAM_WITH_GENRES, genre);
+        queryMap.put(DiscoverService.PARAM_REGION, region);
+        queryMap.put(DiscoverService.PARAM_PAGE, null == page ? "1" : page.toString());
+        queryMap.put(DiscoverService.PARAM_SORT_BY, DiscoverService.SORT_BY_POPULARITY_DESC);
+        return discoverService.discoverMovie(queryMap);
+    }
+
+    public MoviePageResults moviesByYear(Integer year, Integer page, String region) {
+        log.debug("Search movie by year, year={}, page={}, region={}", year, page, region);
+        Map<String, String> queryMap = new HashMap<>();
+        if (null == year) {
+            Calendar calendar = Calendar.getInstance();
+            queryMap.put(DiscoverService.PARAM_WITH_YEAR, String.valueOf(calendar.get(Calendar.YEAR)));
+        } else {
+            queryMap.put(DiscoverService.PARAM_WITH_YEAR, year.toString());
+        }
         queryMap.put(DiscoverService.PARAM_REGION, region);
         queryMap.put(DiscoverService.PARAM_PAGE, null == page ? "1" : page.toString());
         queryMap.put(DiscoverService.PARAM_SORT_BY, DiscoverService.SORT_BY_POPULARITY_DESC);

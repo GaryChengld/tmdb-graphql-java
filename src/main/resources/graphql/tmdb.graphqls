@@ -18,6 +18,7 @@ type Query {
     upcomingMovies(page: Int! = 1, region: String): MoviePageResults
     searchMovie(query: String, page: Int! = 1, region: String): MoviePageResults
     moviesByGenre(genre: String, page: Int! = 1, region: String): MoviePageResults
+    moviesByYear(year: Int!, page: Int! = 1, region: String): MoviePageResults
 }
 
 type BaseMovie {
