@@ -29,9 +29,9 @@ public class PersonResolver implements GraphQLResolver<Person> {
 
     public PersonMovieCredits getMovieCredits(Person person) {
         if (null == person.getMovieCredits()) {
-            person.setMovieCredits(this.personService.getPersonMovieCredits(person.getId()).sort());
+            person.setMovieCredits(this.personService.getPersonMovieCredits(person.getId()));
         }
-        return person.getMovieCredits();
+        return person.getMovieCredits().sort();
     }
 
     public List<BaseMovie> getKnownFor(Person person) {

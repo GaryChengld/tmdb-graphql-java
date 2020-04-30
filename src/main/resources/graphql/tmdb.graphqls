@@ -154,6 +154,11 @@ type MovieCrew {
     trailer: Video
 }
 
+type MovieCrewGroup {
+    department: String
+    crews: [MovieCrew]
+}
+
 type Images {
      backdrops(size: ImageSize = ORIGINAL): [String]
      posters(size: ImageSize = ORIGINAL): [String]
@@ -213,6 +218,7 @@ type PersonMovieCredits {
     id: Int
     casts: [MovieCast]
     crews: [MovieCrew]
+    crewGroups: [MovieCrewGroup]
 }
 
 enum ImageSize {

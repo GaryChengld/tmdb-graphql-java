@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Gary Cheng
@@ -19,6 +21,18 @@ public class PersonMovieCredits {
     private List<MovieCast> casts;
     @JsonAlias("crew")
     private List<MovieCrew> crews;
+
+    public List<MovieCrewGroup> getCrewGroups() {
+        List<MovieCrewGroup> crewGroups = crews.stream()
+                .collect(Collectors.groupingBy(MovieCrew::getDepartment))
+                .entrySet()
+                .stream()
+                .map(e -> new MovieCrewGroup(e.getKey(), e.getValue()))
+                .sorted(Comparator.comparing(MovieCrewGroup::getDepartment))
+                .collect(Collectors.toList());
+        crewGroups.forEach(group -> Collections.sort(group.getCrews(), (c1, c2) -> this.compareDate(c1.getReleaseDate(), c2.getReleaseDate())));
+        return crewGroups;
+    }
 
     public PersonMovieCredits sort() {
         Collections.sort(this.casts, (c1, c2) -> this.compareDate(c1.getReleaseDate(), c2.getReleaseDate()));
