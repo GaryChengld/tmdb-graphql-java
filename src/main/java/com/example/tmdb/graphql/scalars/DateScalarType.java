@@ -1,20 +1,15 @@
 package com.example.tmdb.graphql.scalars;
 
-import static com.example.tmdb.graphql.TmdbConstants.TMDB_DATE_PATTERN;
+import graphql.language.StringValue;
+import graphql.schema.*;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
-
-import graphql.language.StringValue;
-import graphql.schema.Coercing;
-import graphql.schema.CoercingParseLiteralException;
-import graphql.schema.CoercingParseValueException;
-import graphql.schema.CoercingSerializeException;
-import graphql.schema.GraphQLScalarType;
+import static com.example.tmdb.graphql.TmdbConstants.TMDB_DATE_PATTERN;
 
 @Component
 public class DateScalarType extends GraphQLScalarType {

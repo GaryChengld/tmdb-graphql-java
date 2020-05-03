@@ -16,8 +16,8 @@ public interface SearchService {
     /**
      * Search movie
      *
-     * @param query a text query to search
-     * @param page which page to search
+     * @param query  a text query to search
+     * @param page   which page to search
      * @param region the region to filter
      * @return the list of movies
      */

@@ -1,12 +1,11 @@
 package com.example.tmdb.graphql.services;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
+import com.example.tmdb.graphql.FeignConfig;
+import com.example.tmdb.graphql.types.GenreResults;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.tmdb.graphql.FeignConfig;
-import com.example.tmdb.graphql.types.GenreResults;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * @author Gary Cheng
